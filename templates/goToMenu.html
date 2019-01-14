@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+		<meta charset="utf-8" />
+		<title>bootstrap案例</title>
+		<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+		<!--font-awesome 核心我CSS 文件-->
+		<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- 在bootstrap.min.js 之前引入 -->
+		<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+		<!-- Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+	function nyuryoku() {
+		var noon_startTime1=document.getElementById("noon_startTime1").value;
+		var noon_startTime2=document.getElementById("noon_startTime2").value;
+		var noon_endTime1=document.getElementById("noon_endTime1").value;
+		var noon_endTime2=document.getElementById("noon_endTime2").value;
+		var night_startTime1=document.getElementById("night_startTime1").value;
+		var night_startTime2=document.getElementById("night_startTime2").value;
+		var night_endTime1=document.getElementById("night_endTime1").value;
+		var night_endTime2=document.getElementById("night_endTime2").value;
+	if(noon_startTime1==""||noon_startTime2==""||noon_endTime1==""||noon_endTime2==""||night_startTime1==""||night_startTime2==""||night_endTime1==""||night_endTime2==""){
+		document.getElementById("error").innerHTML="システムを設定してください";
+		return false;
+		}
+	else{
+		var url = "http://localhost:8080/hello1/Menu?employeeNo="+ document.getElementById("employeeNo").value;
+		window.location.href = url;
+		return true;
+	}
+}
+	function setTime() {
+
+		var url = "http://localhost:8080/hello1/SetTime?employeeNo="+ document.getElementById("employeeNo").value;
+		window.location.href = url;
+
+	}
+	function jyouhou() {
+
+		var url = "http://localhost:8080/hello1/AddEmployee?employeeNo="+ document.getElementById("employeeNo").value;
+		window.location.href = url;
+	}
+
+	function password() {
+
+		window.location.href = "http://localhost:8080/hello1/Password.jsp";
+	}
+
+	function kensaku() {
+
+		var url = "http://localhost:8080/hello1/Search?employeeNo="+ document.getElementById("employeeNo").value;
+		window.location.href = url;
+	}
+
+	onload = function() {
+		if (document.getElementsByName("get1")[0]) {
+			if (document.getElementsByName("get1")[0].innerHTML.trim() == "0") {
+				document.getElementById("manage").setAttribute("hidden");
+			}
+		}
+		if ("${session.authorityProperties}" == "社員") {
+			document.getElementById("manage").style.display = "none";
+
+		}
+	}
+
+	function trim() {
+		var start, end;
+		start = 0;
+		end = this.length - 1;
+		while (start <= end && this.charAt(start) == ' ') {
+			start++;
+		}
+		while (start <= end && this.charAt(end) == " ") {
+			end--;
+		}
+		return this.substring(start, end + 1);
+	}
+</script>
+</head>
+<body>
+	<div align="right">
+		LYC株式会社<a href="http://localhost:8080/hello1/Loginpage.jsp">サインアウト</a>
+	</div>
+	<h1 align="center">社員勤務管理システム</h1>
+	<div align="center">メニュー一覧</div><br>
+	<form action="http://localhost:8080/hello1/Information" method="post" >
+	<div>
+		<input type="hidden" name="employeeNo" id ="employeeNo" value= "${session.employeeNo}"/>
+		<input type="hidden" id="noon_startTime1" value="[{session.noon_startTime1}"/><input type="hidden" id="noon_startTime2" value="${session.noon_startTime2}"/><input type="hidden" id="noon_endTime1" value="${session.noon_endTime1}"/><input type="hidden" id="noon_endTime2" value="${session.noon_endTime2}"/>
+		<input type="hidden" id="night_startTime1" value="${session.night_startTime1}"/><input type="hidden" id="night_startTime2" value="${session.night_startTime2}"/><input type="hidden" id="night_endTime1" value="${session.night_endTime1}"/><input type="hidden" id="night_endTime2" value="${session.night_endTime2}"/>
+
+	</div>
+	<div>${session.authorityProperties}：{{ request.session.name }}</div>
+
+	<table align="center" cellpadding="10">
+		<tr>
+			<td id="error" style="color: rgb(255, 0, 0);"></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="実績入力" onclick="return nyuryoku()" style="width:200px;height:200px;"/></td>
+			<td></td>
+			<td><input type="button" value="システム設定" onclick="setTime()" style="width:200px;height:200px;"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="button" id ="manage" onclick="window.open('Management.jsp')" value="社員情報管理" style="width:200px;height:200px;"/></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="パスワードリセット" onclick="password()" style="width:200px;height:200px;"/></td>
+			<td></td>
+			<td><input type="button" value="実績検索" onclick="kensaku()" style="width:200px;height:200px;"/></td>
+		</tr>
+	</table>
+	</form>
+	<a href="http://localhost:8080/hello1/Loginpage.jsp">戻る</a>
+
+</body>
+</html>

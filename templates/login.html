@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Login</title>
+		<!--用百度的静态资源库的cdn安装bootstrap环境-->
+		<!-- Bootstrap 核心 CSS 文件 -->
+		<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+		<!--font-awesome 核心我CSS 文件-->
+		<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- 在bootstrap.min.js 之前引入 -->
+		<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+		<!-- Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			body{background: url({% static '/img/4.jpg' %}) no-repeat;background-size: cover;font-size: 16px;}
+			.form{background: rgba(255,255,255,0.2);width:400px;margin:100px auto;}
+			#login_form{display: block;}
+			#register_form{display: none;}
+			.fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
+			input[type="text"],input[type="password"]{padding-left:26px;}
+			.checkbox{padding-left:21px;}
+		</style>
+        <script>
+            $(function(){
+              $("#login").click(function(){
+                var employeeNo = $("#employeeNo");
+                var password = $("#password");
+            	if(employeeNo.val().length==0){
+            		alert("社員番号を入力してください");
+            		return false;
+            	}
+
+            	if(employeeNo.val().length<6||employeeNo.val().substring(0,3)!="lyc"){
+            		alert("正しく社員番号を入力してください");
+            		return false;
+            	}
+
+            	if(password.val().length==0){
+            		alert("パースワード入力してください");
+            		return false;
+            	}
+
+            	if(password.val().length<6){
+            	    alert("6位以上パースワード入力してください");
+            		return false;
+            	}
+                $.ajax({
+                    url:"/ajax/",
+                    type:'POST',
+                    data:{
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        employeeNo:employeeNo.val(),
+                        password:password.val()
+                    },
+                    success: function (arg) {
+                        var arg = JSON.parse(arg);
+                        if(arg.meg=="ERROR"){
+                            alert("正しいパースワード入力してください");
+                        }else{
+                            $("#login_form").submit();
+                        }
+                    }
+                });
+              });
+           });
+</script>
+	</head>
+	<body>
+	<div class="container">
+		<div class="form row">
+			<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form" method="post" action="/goToMenu/">
+				{% csrf_token %}
+                <h3 class="form-title">Login to your account</h3>
+				<div class="col-sm-9 col-md-9">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i>
+						<input class="form-control required" id="employeeNo" type="text" placeholder="employeeNo" name="employeeNo" autofocus="autofocus" maxlength="6" value="lyc001"/>
+					</div>
+					<div class="form-group">
+							<i class="fa fa-lock fa-lg"></i>
+							<input class="form-control required" id="password" type="password" placeholder="Password" name="password" maxlength="12" value="123123"/>
+					</div>
+                    <div>
+                        <input type="hidden" name="authority" id="authority">
+                        <input type="hidden" name="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="login" class="btn btn-success pull-right">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+		</div>
+	</body>
+</html>
