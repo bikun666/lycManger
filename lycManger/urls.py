@@ -25,4 +25,6 @@ urlpatterns = [
     path('login/', views.login),
     path('ajax/', views.ajax),
     path('goToMenu/', views.goToMenu),
+    path('upload_file/', views.upload_file),
+    path('my_download/', views.my_download),
 ]

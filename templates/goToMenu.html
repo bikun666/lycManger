@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,6 +88,8 @@
 	</div>
 	<h1 align="center">社員勤務管理システム</h1>
 	<div align="center">メニュー一覧</div><br>
+    <a href="/upload_file/">upload_file</a>
+    <a href="/my_download/">download</a>
 	<form action="http://localhost:8080/hello1/Information" method="post" >
 	<div>
 		<input type="hidden" name="employeeNo" id ="employeeNo" value= "${session.employeeNo}"/>

@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>my_download</title>
+    		<!--用百度的静态资源库的cdn安装bootstrap环境-->
+		<!-- Bootstrap 核心 CSS 文件 -->
+		<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+		<!--font-awesome 核心我CSS 文件-->
+		<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- 在bootstrap.min.js 之前引入 -->
+		<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+		<!-- Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script>
+            $(function(){
+              $("#login").click(function(){
+                $.ajax({
+                    url:"/my_download/",
+                    type:'POST',
+                    data:{
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        window.open({% static  '' %} + data);
+                    }
+                });
+              });
+           });
+</script>
+</head>
+<body>
+
+
+    <button id="login" >提交</button>
+    <a href="{% static  'xls/xlsx_file.xlsx' %}" download="">download</a>
+</body>
+</html>
