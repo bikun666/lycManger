@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.employee import views
+from apps.myMessages import views as myViews
+from apps.toDoList import views as toDoViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +29,10 @@ urlpatterns = [
     path('goToMenu/', views.goToMenu),
     path('upload_file/', views.upload_file),
     path('my_download/', views.my_download),
+    path('turnToMessageboard/', myViews.turnToMessageboard),
+    path('leaveMessage/', myViews.leaveMessage),
+    path('addTodo/', toDoViews.addTodo),
+    path('searchTodo/', toDoViews.searchTodo),
+    path('delTodo/', toDoViews.delTodo),
+
 ]

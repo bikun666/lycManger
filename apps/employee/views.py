@@ -61,3 +61,5 @@ def my_download(request):
         return HttpResponse(json.dumps(path))
     else:
         return render(request, '../templates/my_download.html')
+
+

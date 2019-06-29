@@ -15,3 +15,18 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# class Message(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     name = models.CharField(max_length=20)
+#     message = models.CharField(default="", max_length=160)
+#     updateTime = models.
+#
+#     class Meta:
+#         db_table = 'employee'
+#         verbose_name = "社員表"
+#         verbose_name_plural = verbose_name
+#
+#     def __str__(self):
+#         return self.name

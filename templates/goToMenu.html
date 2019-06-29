@@ -88,8 +88,8 @@
 	</div>
 	<h1 align="center">社員勤務管理システム</h1>
 	<div align="center">メニュー一覧</div><br>
-    <a href="/upload_file/">upload_file</a>
-    <a href="/my_download/">download</a>
+
+
 	<form action="http://localhost:8080/hello1/Information" method="post" >
 	<div>
 		<input type="hidden" name="employeeNo" id ="employeeNo" value= "${session.employeeNo}"/>
@@ -97,26 +97,26 @@
 		<input type="hidden" id="night_startTime1" value="${session.night_startTime1}"/><input type="hidden" id="night_startTime2" value="${session.night_startTime2}"/><input type="hidden" id="night_endTime1" value="${session.night_endTime1}"/><input type="hidden" id="night_endTime2" value="${session.night_endTime2}"/>
 
 	</div>
-	<div>${session.authorityProperties}：{{ request.session.name }}</div>
+	<div>{{request.session.authority}}：{{ request.session.name }}</div>
 
 	<table align="center" cellpadding="10">
 		<tr>
 			<td id="error" style="color: rgb(255, 0, 0);"></td>
 		</tr>
 		<tr>
-			<td><input type="button" value="実績入力" onclick="return nyuryoku()" style="width:200px;height:200px;"/></td>
-			<td></td>
-			<td><input type="button" value="システム設定" onclick="setTime()" style="width:200px;height:200px;"/></td>
+            <td><button class="btn btn-box btn-lg"onclick="return nyuryoku()" style="width:150px;height:150px;">実績入力</button></td>
+			<td><a style="line-height:130px;width:150px;height:150px;text-align:center" role="button" class="btn btn-primary btn-lg" href="/upload_file/">upload_file</a></td>
+			<td><input type="button" value="システム設定" onclick="setTime()" style="width:150px;height:150px;"/></td>
 		</tr>
 		<tr>
-			<td></td>
-			<td><input type="button" id ="manage" onclick="window.open('Management.jsp')" value="社員情報管理" style="width:200px;height:200px;"/></td>
-			<td></td>
+			<td><a style="line-height:130px;width:150px;height:150px;text-align:center" class="btn btn-primary btn-lg text-center" href="/my_download/" role="button">download</a></td>
+			<td><input type="button" id ="manage" onclick="window.open('Management.jsp')" value="社員情報管理" style="width:150px;height:150px;"/></td>
+			<td><a style="line-height:130px;width:150px;height:150px;text-align:center" class="btn btn-primary btn-lg text-center" href="/turnToMessageboard/" role="button">ToMeg</a></td>
 		</tr>
 		<tr>
-			<td><input type="button" value="パスワードリセット" onclick="password()" style="width:200px;height:200px;"/></td>
+			<td><input type="button" value="パスワードリセット" onclick="password()" style="width:150px;height:150px;"/></td>
 			<td></td>
-			<td><input type="button" value="実績検索" onclick="kensaku()" style="width:200px;height:200px;"/></td>
+			<td><input type="button" value="実績検索" onclick="kensaku()" style="width:150px;height:150px;"/></td>
 		</tr>
 	</table>
 	</form>
