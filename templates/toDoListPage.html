@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+</head>
+<body>
+    <form method="post" action="/searchTodo/">
+        {% csrf_token %}
+        <input type="text" name="title" id="title">
+        <input type="submit" value="search">
+    </form>
+-----------------------------------------------------------------
+        <ul>
+            {% for q in username %}
+              <li>  {{ q.updateTime }}---
+                {{ q.name }}---
+                {{ q.message }}---
+        {% endfor %}
+        </ul>
+</body>
+</html>

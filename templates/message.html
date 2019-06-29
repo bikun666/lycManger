@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>uploadFile</title>
+</head>
+<body>
+    <form method="post" action="/leaveMessage/">
+        {% csrf_token %}
+        <input type="text" name="name" id="name">
+        <br/>
+        <input type="text" name="message" id="message">
+        <br/>
+        <input type="submit" value="submit">
+    </form>
+-----------------------------------------------------------------
+        <ul>
+            {% for q in username %}
+              <li>  {{ q.updateTime }}---
+                {{ q.name }}---
+                {{ q.message }}---
+        {% endfor %}
+        </ul>
+</body>
+</html>
